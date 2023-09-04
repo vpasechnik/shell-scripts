@@ -34,7 +34,7 @@ function __set_my_prompt
         ps_git=" ($git_modified_color$git_branch${NOCOLOR})"
     fi
 
-    PS1="${GREEN}\u@\h:${YELLOW}\w$ps_git${NOCOLOR}\$ "
+    PS1="${GREEN}\u@\h:${YELLOW}\w${NOCOLOR}$ps_git${NOCOLOR}\$ "
 }
 
 PROMPT_COMMAND='__set_my_prompt'
