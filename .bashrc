@@ -20,21 +20,27 @@ function __set_my_prompt
     local BLACK="\[\033[0;30m\]"
 
     local ps_git=""
-    local git_branch=$(git branch --show-current 2>/dev/null)
+    local git_branch="$(git branch --show-current 2>/dev/null)"
     if [ "$git_branch" != "" ]; then
         local git_modified_color="${GREEN}"
-        local git_status=$(git status 2>/dev/null | grep "Your branch is ahead" 2>/dev/null)
+        local git_status="$(git status 2>/dev/null | grep "Your branch is ahead" 2>/dev/null)"
         if [ "$git_status" != "" ]; then
            git_modified_color="${YELLOW}"
         fi
-        local git_status=$(git status --porcelain 2>/dev/null)
+        local git_status="$(git status --porcelain 2>/dev/null)"
         if [ "$git_status" != "" ]; then
             git_modified_color="${RED}"
         fi
-        ps_git=" ($git_modified_color$git_branch${NOCOLOR})"
+        ps_git=" ${NOCOLOR}($git_modified_color$git_branch${NOCOLOR})${NOCOLOR}"
     fi
 
-    PS1="${GREEN}\u@\h:${YELLOW}\w${NOCOLOR}$ps_git${NOCOLOR}\$ "
+    local ps_kubectl=""
+    if which kubectl > /dev/null 2>&1 ; then
+        local kubectl_context="$(kubectl config current-context 2>/dev/null)"
+        local kubectl_ns="$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)"
+        ps_kubectl="${NOCOLOR}(k8s|${GREEN}${kubectl_context}${NOCOLOR}:${RED}${kubectl_ns}${NOCOLOR}) "
+    fi
+    PS1="${ps_kubectl}${GREEN}\u@\h:${YELLOW}\w${ps_git}\$ "
 }
 
 PROMPT_COMMAND='__set_my_prompt'
