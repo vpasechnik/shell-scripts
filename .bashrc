@@ -14,7 +14,7 @@ which kubectl >/dev/null 2>&1 &&
 
 alias update.bashrc="curl https://raw.githubusercontent.com/vpasechnik/shell-scripts/main/.bashrc -o ~/.bashrc 2>/dev/null"
 alias install.glab.cli="go install gitlab.com/gitlab-org/cli/cmd/glab@main && export PATH=\$PATH:\$GOPATH/bin"
-alias install.git.completion="curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash && . ~/.git-completion.bash"
+alias install.git.completion="curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash && "
 
 function __set_my_prompt
 {
@@ -43,7 +43,8 @@ function __set_my_prompt
     if which kubectl > /dev/null 2>&1 ; then
         local kubectl_context="$(kubectl config current-context 2>/dev/null)"
         local kubectl_ns="$(kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)"
-        ps_kubectl="${NOCOLOR}(k8s|${GREEN}${kubectl_context}${NOCOLOR}:${RED}${kubectl_ns}${NOCOLOR}) "
+        [ "${kubectl_context}" != "" ] &&
+            ps_kubectl="${NOCOLOR}(k8s|${GREEN}${kubectl_context}${NOCOLOR}:${RED}${kubectl_ns}${NOCOLOR}) "
     fi
     PS1="${ps_kubectl}${GREEN}\u@\h:${YELLOW}\w${ps_git}\$ "
 }
