@@ -46,7 +46,7 @@ function __set_my_prompt
         [ "${kubectl_context}" != "" ] &&
             ps_kubectl="${NOCOLOR}(k8s|${GREEN}${kubectl_context}${NOCOLOR}:${RED}${kubectl_ns}${NOCOLOR}) "
     fi
-    PS1="${ps_kubectl}${GREEN}\u@\h:${YELLOW}\w${NOCOLOR}${ps_git}\$ "
+    PS1="${ps_kubectl}${GREEN}\u@\h:${YELLOW}\w${NOCOLOR}${ps_git}\n\$ "
 }
 
 PROMPT_COMMAND='__set_my_prompt'
