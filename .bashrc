@@ -8,13 +8,14 @@ which kubectl >/dev/null 2>&1 &&
     complete -o default -F __start_kubectl k &&
     complete -o default -F __start_kubectl kubectl.exe
 
-[ -f ~/.git-completion.bash ] &&
-  . ~/.git-completion.bash
-
+[ -e ~/lib/git-completion.bash ] &&
+    . ~/lib/git-completion.bash
+[ -e ~/lib/oci_autocomplete.sh ] &&
+    . ~/lib/oci_autocomplete.sh
 
 alias update.bashrc="curl https://raw.githubusercontent.com/vpasechnik/shell-scripts/main/.bashrc -o ~/.bashrc 2>/dev/null"
 alias install.glab.cli="go install gitlab.com/gitlab-org/cli/cmd/glab@main && export PATH=\$PATH:\$GOPATH/bin"
-alias install.git.completion="curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/.git-completion.bash && "
+alias install.git.completion="mkdir -p ~/lib && curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/lib/git-completion.bash && . ~/lib/git-completion.bash"
 
 function __set_my_prompt
 {
