@@ -2,6 +2,8 @@
 # source global definitions
 [ -e /etc/bashrc ] &&
     . /etc/bashrc
+[ -e /etc/bashrc.cloudshell ] &&
+    . /etc/bashrc.cloudshell
 
 which minikube >/dev/null 2>&1 &&
     . <(minikube completion bash) && 
