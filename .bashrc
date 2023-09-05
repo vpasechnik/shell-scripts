@@ -1,3 +1,8 @@
+
+# source global definitions
+[ -e /etc/bashrc ] &&
+    . /etc/bashrc
+
 which minikube >/dev/null 2>&1 &&
     . <(minikube completion bash) && 
     complete -o default -F __start_minikube minikube.exe
