@@ -5,6 +5,11 @@
 [ -e /etc/bashrc.cloudshell ] &&
     . /etc/bashrc.cloudshell
 
+# add go utils to path if go is available
+which go >/dev/null 2>&1 &&
+    echo $PATH | grep -v $(go env GOPATH)/bin >/dev/null &&
+    PATH=$PATH:$(go env GOPATH)/bin
+
 which minikube >/dev/null 2>&1 &&
     . <(minikube completion bash) && 
     complete -o default -F __start_minikube minikube.exe
