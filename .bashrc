@@ -20,6 +20,9 @@ which kubectl >/dev/null 2>&1 &&
     complete -o default -F __start_kubectl k &&
     complete -o default -F __start_kubectl kubectl.exe
 
+which kind >/dev/null 2>&1 &&
+    . <(kind completion bash)
+
 [ -e ~/lib/git-completion.bash ] &&
     . ~/lib/git-completion.bash
 [ -e ~/lib/oci_autocomplete.sh ] &&
