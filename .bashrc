@@ -32,6 +32,7 @@ which kind >/dev/null 2>&1 &&
     . ~/lib/oci_autocomplete.sh
 
 alias update.bashrc="curl https://raw.githubusercontent.com/vpasechnik/shell-scripts/main/.bashrc -o ~/.bashrc"
+alias install.inputrc="curl https://raw.githubusercontent.com/vpasechnik/shell-scripts/main/.inputrc -o ~/.inputrc"
 alias install.glab.cli="go install gitlab.com/gitlab-org/cli/cmd/glab@main"
 alias install.yq="go install github.com/mikefarah/yq/v4@latest"
 alias install.git.completion="mkdir -p ~/lib && curl https://raw.githubusercontent.com/git/git/master/contrib/completion/git-completion.bash -o ~/lib/git-completion.bash && . ~/lib/git-completion.bash"
